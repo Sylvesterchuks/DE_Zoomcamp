@@ -50,7 +50,7 @@ docker run -it ubuntu bash
 
 docker run -it python:3.9
 
-docker run -it --entrrypoint=bash python:3.9
+docker run -it --entrypoint=bash python:3.9
 
 ```
 
@@ -117,18 +117,12 @@ docker run -it \
     -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
     -e PGADMIN_DEFAULT_PASSWORD="root" \
     -p 8080:80 \
-    -v $(pwd)/pgadmin:/var/lib/pgadmin \
     --network=pg-network \
     --name=pgadmin \
     dpage/pgadmin4
+
 And now, we are able to create the server using pgadmin's interface.
-docker run -it \
-    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
-    -e PGADMIN_DEFAULT_PASSWORD="root" \
-    -p 8080:80 \
-    --network=pg-network \
-    --name=pgadmin \
-    dpage/pgadmin4
+
 
 
 
@@ -157,6 +151,7 @@ python ingest_data.py \
     --db=ny_taxi \
     --table_name=yellow_taxi_trips \
     --url=${URL}
+
 Step 4: Drop the table yellow_taxi_data again.
 
 DROP TABLE yellow_taxi_data;
@@ -174,6 +169,7 @@ docker run -it \
     --db=ny_taxi \
     --table_name=yellow_taxi_trips \
     --url=${URL}
+    
 Step 5: check if the ingestion worked.
 
 SELECT count(1) from yellow_taxi_trips;
